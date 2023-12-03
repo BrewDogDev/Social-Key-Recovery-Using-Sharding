@@ -1,0 +1,16 @@
+//Share validation
+INPUT: share, proof, index, merkle_root
+OUTPUT: validity
+current_value <- hash(share)
+FOR hash_value in proof 
+    IF index is even
+        current_value <- hash(current_value + hash_value)
+    ELSE
+        current_value <- hash(hash_value + current_value)
+    index <- index integer_divided_by 2
+IF current_value is merkle_root:
+    RETURN VALID_SHARE
+ELSE:
+    RETURN INVALID_SHARE
+    
+    

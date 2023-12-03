@@ -1,0 +1,18 @@
+//Reconstruct the Secret from k valid shares
+INPUT: shares
+OUTPUT: shamirs_secret
+FUNCTION lagrange_basis_polynomial(j, x_evaluation, X):
+    //Equation III from section III.B.b
+    basis_poly <- 1
+    FOR i <- 0 to len(X), where i != j:
+        // Note: making use of a fraction library to evaluate
+        // qoutients can alleviate floating point errors
+        basis_poly <- basis_poly * (x_evaluation - X[i]) / (X[j] - X[i]) 
+    RETURN basis_poly
+X <- an ordered list of all x values from the shares
+//Equation II from section III.B.b
+shamirs_secret <- 0
+FOR index, y in shares
+    shamirs_secret <- shamirs_secret + yi * lagrange_basis_poly(index, 0, X)
+RETURN shamirs_secret
+

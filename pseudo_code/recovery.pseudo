@@ -1,0 +1,9 @@
+INPUT: recoverered_address, recovering_address
+OUTPUT: success
+balance_temp <- balance_of(recovered_address)
+balance_of(recovering_address) <- balance_temp
+balance_of(recovered_address) <- 0
+
+Log the recovery of recovered_address to recovering_address
+RETURN true
+

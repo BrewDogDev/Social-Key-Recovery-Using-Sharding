@@ -1,0 +1,23 @@
+{
+  "name": "social-key-recovery-using-sharding",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/encrypted_communication/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://github.com/BrewDogDev/Social-Key-Recovery-Using-Sharding#readme",
+  "dependencies": {
+    "@alch/alchemy-web3": "^1.4.2",
+    "axios": "^0.26.1",
+    "eth-crypto": "^2.2.0",
+    "ethereumjs-tx": "^2.1.2",
+    "web3": "^1.7.3"
+  }
+}

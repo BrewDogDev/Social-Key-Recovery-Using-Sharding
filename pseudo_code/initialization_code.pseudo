@@ -1,0 +1,39 @@
+//Initialization Phase
+INPUT: S, k, n
+OUTPUT: shares, proofs, merkle_root
+//Pseudorandomly generate a polynomial P of degree k-1
+P <- S + a1*x + a2*x^2+ ... a_k_minus_1*x^{k-1}
+//Pseudorandomly generate n integers [x1,x2,..,xn]
+X <- [x1,x2,..,xn]
+shares <- Empty List
+FOR Each xi in X:
+    append (xi, P(xi)) to ending of shares
+    
+//Create n leaf nodes from the hashes of each share
+leaves <- Empty List
+FOR each share in shares:
+    append Node(Hash(share)) to ending of leaves
+//Create x additional leaf nodes equivalent to the nth leaf node 
+//Such that x+n is a power of 2
+FOR i <- 0 TO x:
+    append Node(Hash(share_n)) to ending of leaves
+//Constuct a Merkle tree from the bottom up using the leaf nodes
+tree_height <- log2(length of leaves)
+WHILE leaves contains more nodes than just the root
+    next_leaves <- Empty List
+    FOR leaf1, leaf2 <- EACH pair of leaves in leaves 
+        //example (0,1), (2,3), (4,5)
+        append Node(Hash(leaf1.value + leaf2.value), leaf1, leaf2) 
+        to ending of next_leaves
+merkle_root_node <- leaves[0]
+
+FUNCTION get_proof_of_inclusion(current_node, index_of_desired_leaf, num_leaves):
+    Recursively traverse the tree from the root to the desired leaf
+    Saving each path not taken to the proof of inclusion
+//Generate a proof of inclusion for each share
+proofs <- Empty List
+FOR index <- 0 TO n
+    proof <- get_proof_of_inclusion(merkle_root_node, index, 2^(tree_height-1))
+    append proof to ending of proofs
+RETURN shares, proof, value of merkle_root_node
+

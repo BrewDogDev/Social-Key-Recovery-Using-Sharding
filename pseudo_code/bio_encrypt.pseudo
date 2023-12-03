@@ -1,0 +1,9 @@
+//Biometrically Encrypt shares
+INPUT: shares, bio_template
+OUTPUT: encrypted_shares
+encrypted_shares <- Empty List
+FOR share in shares
+    encrypted_share <- biometric_encryption(share, bio_template)
+    append encrypted_share to ending of encrypted_shares 
+RETURN encrypted_shares
+
